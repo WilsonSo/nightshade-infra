@@ -5,7 +5,7 @@ locals {
 module "cluster" {
 
   project                             = local.project
-  source                              = "git@github.com:WilsonSo/nightshade-gke-module.git?ref=test"
+  source                              = "git@github.com:WilsonSo/nightshade-gke-module.git?ref=0.1.0"
   region                              = "us-west3"
   location                            = "us-west3-c"
   cluster_name                        = "cluster"
@@ -25,7 +25,7 @@ module "cluster" {
 
   node_pools = {
     ingress-pool = {
-      machine_type       = "f1-micro" # $$$
+      machine_type       = "e2-micro" # $$$
       initial_node_count = 1
       min_node_count     = 1
       max_node_count     = 1
@@ -38,7 +38,7 @@ module "cluster" {
       service_account    = "cluster-serviceaccount@${local.project}.iam.gserviceaccount.com"
     }
     web-pool = {
-      machine_type       = "f1-micro" # $$$
+      machine_type       = "e2-micro" # $$$
       initial_node_count = 1
       min_node_count     = 1
       max_node_count     = 1
