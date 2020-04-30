@@ -27,7 +27,7 @@ gcloud iam service-accounts keys create ${TF_CREDS} \
   --iam-account terraform@${PROJECT_NAME}.iam.gserviceaccount.com
 
 # grant service account permission to view Admin Project & Manage Cloud Storage
-for ROLE in 'storage.objectAdmin' 'storage.admin' 'iam.roleAdmin' 'resourcemanager.projectIamAdmin'; do
+for ROLE in 'container.admin' 'iam.serviceAccountAdmin' 'compute.admin' 'storage.admin' 'iam.roleAdmin' 'resourcemanager.projectIamAdmin'; do
   gcloud projects add-iam-policy-binding ${PROJECT_NAME} \
     --member serviceAccount:terraform@${PROJECT_NAME}.iam.gserviceaccount.com \
     --role roles/${ROLE}
@@ -37,3 +37,6 @@ done
 for API in 'cloudresourcemanager' 'cloudbilling' 'iam' 'compute'; do
   gcloud services enable "${API}.googleapis.com"
 done
+
+# Once the above is finished, setup the terraform workspace and init file to run terraform apply
+
